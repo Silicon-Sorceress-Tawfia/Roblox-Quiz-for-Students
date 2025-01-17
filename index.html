@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Quiz by Tawia Miss</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        .instructions {
+            margin-bottom: 20px;
+            background: #e7f3fe;
+            padding: 10px;
+            border-left: 4px solid #2196F3;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            margin: 0 0 10px;
+        }
+        .answers {
+            list-style-type: none;
+            padding: 0;
+        }
+        .answers li {
+            margin-bottom: 10px;
+        }
+        .submit-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1769aa;
+        }
+    </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_EMAILJS_USER_ID");
+        })();
+
+        function submitQuiz(event) {
+            event.preventDefault();
+
+            const formData = new FormData(document.getElementById('quizForm'));
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const answers = [];
+
+            formData.forEach((value, key) => {
+                if (key.startsWith('q')) {
+                    answers.push(`${key}: ${value}`);
+                }
+            });
+
+            const message = `Name: ${name}\nEmail: ${email}\n\nAnswers:\n${answers.join('\n')}`;
+
+            emailjs.send("service_yourServiceId", "template_yourTemplateId", {
+                name: name,
+                email: email,
+                message: message
+            }).then(() => {
+                alert("Your quiz has been submitted successfully.");
+                document.getElementById('quizForm').reset();
+            }).catch((error) => {
+                alert("There was an error submitting your quiz. Please try again.");
+                console.error(error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Roblox Quiz</h1>
+        <p class="instructions">This quiz is created by Tawia Miss. You have 40 minutes to complete the quiz. Each question carries 1 mark. When you are done, type your name and email, and click Submit. Do not type the teacher's email.</p>
+
+        <form id="quizForm" onsubmit="submitQuiz(event)">
+            <!-- Questions 1-30 -->
+            <div class="question">
+                <p>1. Which two people invented Roblox?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q1" value="a" required> Tim Cook and Steve Jobs</label></li>
+                    <li><label><input type="radio" name="q1" value="b"> David Baszucki and Erik Cassel</label></li>
+                    <li><label><input type="radio" name="q1" value="c"> Bill Gates and Paul Allen</label></li>
+                    <li><label><input type="radio" name="q1" value="d"> Tee and Mo</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>2. What is the primary tool used in Roblox Studio to change the position of an object in the workspace?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q2" value="a" required> Scale Tool</label></li>
+                    <li><label><input type="radio" name="q2" value="b"> Move Tool</label></li>
+                    <li><label><input type="radio" name="q2" value="c"> Rotate Tool</label></li>
+                    <li><label><input type="radio" name="q2" value="d"> View Tool</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>3. What keyboard shortcut is used to toggle the Move Tool in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q3" value="a" required> R</label></li>
+                    <li><label><input type="radio" name="q3" value="b"> G</label></li>
+                    <li><label><input type="radio" name="q3" value="c"> W</label></li>
+                    <li><label><input type="radio" name="q3" value="d"> M</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>4. Which tool in Roblox Studio allows you to increase or decrease the size of an object?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q4" value="a" required> Move Tool</label></li>
+                    <li><label><input type="radio" name="q4" value="b"> Rotate Tool</label></li>
+                    <li><label><input type="radio" name="q4" value="c"> Part Tool</label></li>
+                    <li><label><input type="radio" name="q4" value="d"> Scale Tool</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>5. What is the difference between Global and Local rotation in the Rotate Tool?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q5" value="a" required> Global is for large models, and Local is for small parts.</label></li>
+                    <li><label><input type="radio" name="q5" value="b"> Global rotates the object relative to the world, while Local rotates it relative to itself.</label></li>
+                    <li><label><input type="radio" name="q5" value="c"> Global affects all objects in the workspace, and Local affects individual objects.</label></li>
+                    <li><label><input type="radio" name="q5" value="d"> Global rotates parts randomly, while Local rotates them at fixed angles.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>6. How can you create a new Part in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q6" value="a" required> By using the Rotate Tool</label></li>
+                    <li><label><input type="radio" name="q6" value="b"> By selecting "Insert > Part" in the Home tab</label></li>
+                    <li><label><input type="radio" name="q6" value="c"> By resizing an existing object</label></li>
+                    <li><label><input type="radio" name="q6" value="d"> By clicking the Move Tool</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>7. What is the purpose of the View Tool in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q7" value="a" required> To modify the size of an object</label></li>
+                    <li><label><input type="radio" name="q7" value="b"> To navigate and inspect the workspace from different angles</label></li>
+                    <li><label><input type="radio" name="q7" value="c"> To rotate objects at specific angles</label></li>
+                    <li><label><input type="radio" name="q7" value="d"> To change the material of parts</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>8. What happens when you scale a part uniformly in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q8" value="a" required> Only one dimension changes.</label></li>
+                    <li><label><input type="radio" name="q8" value="b"> The part maintains its proportions while changing size.</label></li>
+                    <li><label><input type="radio" name="q8" value="c"> The part rotates instead of scaling.</label></li>
+                    <li><label><input type="radio" name="q8" value="d"> The material of the part changes.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>9. Which view mode in Roblox Studio is used to inspect objects from above?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q9" value="a" required> Top View</label></li>
+                    <li><label><input type="radio" name="q9" value="b"> Front View</label></li>
+                    <li><label><input type="radio" name="q9" value="c"> Perspective View</label></li>
+                    <li><label><input type="radio" name="q9" value="d"> Orthographic View</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>10. What happens when you hold the Shift key while using the Rotate Tool?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q10" value="a" required> The object rotates in 45-degree increments.</label></li>
+                    <li><label><input type="radio" name="q10" value="b"> The rotation is smoother.</label></li>
+                    <li><label><input type="radio" name="q10" value="c"> The object scales proportionally.</label></li>
+                    <li><label><input type="radio" name="q10" value="d"> The object snaps to the grid.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>11. Which tab in Roblox Studio contains the tools for Move, Scale, Rotate, and View?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q11" value="a" required> Home</label></li>
+                    <li><label><input type="radio" name="q11" value="b"> Model</label></li>
+                    <li><label><input type="radio" name="q11" value="c"> View</label></li>
+                    <li><label><input type="radio" name="q11" value="d"> Edit</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>12. What does the Scale Tool in Roblox Studio do?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q12" value="a" required> Rotates the object around its axis.</label></li>
+                    <li><label><input type="radio" name="q12" value="b"> Moves the object to a new position.</label></li>
+                    <li><label><input type="radio" name="q12" value="c"> Changes the size of an object.</label></li>
+                    <li><label><input type="radio" name="q12" value="d"> Changes the material of an object.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>13. What shortcut is used to toggle the Rotate Tool in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q13" value="a" required> R</label></li>
+                    <li><label><input type="radio" name="q13" value="b"> W</label></li>
+                    <li><label><input type="radio" name="q13" value="c"> T</label></li>
+                    <li><label><input type="radio" name="q13" value="d"> M</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>14. What happens when you duplicate a part in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q14" value="a" required> The original part is resized.</label></li>
+                    <li><label><input type="radio" name="q14" value="b"> An exact copy of the part is created in the workspace.</label></li>
+                    <li><label><input type="radio" name="q14" value="c"> The part disappears from its original position.</label></li>
+                    <li><label><input type="radio" name="q14" value="d"> The part is moved to the origin.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>15. What is the maximum snapping angle for rotation in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q15" value="a" required> 15 degrees</label></li>
+                    <li><label><input type="radio" name="q15" value="b"> 30 degrees</label></li>
+                    <li><label><input type="radio" name="q15" value="c"> 60 degrees</label></li>
+                    <li><label><input type="radio" name="q15" value="d"> 90 degrees</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>16. What is the default part shape in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q16" value="a" required> Block</label></li>
+                    <li><label><input type="radio" name="q16" value="b"> Sphere</label></li>
+                    <li><label><input type="radio" name="q16" value="c"> Cylinder</label></li>
+                    <li><label><input type="radio" name="q16" value="d"> Wedge</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>17. What happens when you press Ctrl + Z in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q17" value="a" required> Moves the selected object.</label></li>
+                    <li><label><input type="radio" name="q17" value="b"> Rotates the selected part.</label></li>
+                    <li><label><input type="radio" name="q17" value="c"> Snaps the part to the grid.</label></li>
+                    <li><label><input type="radio" name="q17" value="d"> Undoes the last action.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>18. What is the function of the Move Tool in Roblox Studio?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q18" value="a" required> Rotates the object.</label></li>
+                    <li><label><input type="radio" name="q18" value="b"> Resizes the object.</label></li>
+                    <li><label><input type="radio" name="q18" value="c"> Changes the position of an object in the workspace.</label></li>
+                    <li><label><input type="radio" name="q18" value="d"> Changes the material of the object.</label></li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <p>19. Which tab in Roblox Studio allows you to add scripts to a model?</p>
+                <ul class="answers">
+                    <li><label><input type="radio" name="q19" value="a" required> Model</label></li>
+                    <li><
+                        <div class="question">
+                            <p>20. What is the purpose of the Explorer panel in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q20" value="a" required> To modify the color of parts.</label></li>
+                                <li><label><input type="radio" name="q20" value="b"> To see the output from running scripts.</label></li>
+                                <li><label><input type="radio" name="q20" value="c"> To access camera settings.</label></li>
+                                <li><label><input type="radio" name="q20" value="d"> To view and organize objects in the workspace.</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>21. Which of the following is NOT a valid part type in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q21" value="a" required> Cone</label></li>
+                                <li><label><input type="radio" name="q21" value="b"> Sphere</label></li>
+                                <li><label><input type="radio" name="q21" value="c"> Wedge</label></li>
+                                <li><label><input type="radio" name="q21" value="d"> Block</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>22. When was Roblox officially released?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q22" value="a" required> 2004</label></li>
+                                <li><label><input type="radio" name="q22" value="b"> 2005</label></li>
+                                <li><label><input type="radio" name="q22" value="c"> 2006</label></li>
+                                <li><label><input type="radio" name="q22" value="d"> 2007</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>23. What was Roblox originally called during its early development phase?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q23" value="a" required> BlockWorld</label></li>
+                                <li><label><input type="radio" name="q23" value="b"> BuildSpace</label></li>
+                                <li><label><input type="radio" name="q23" value="c"> PlaySpace</label></li>
+                                <li><label><input type="radio" name="q23" value="d"> DynaBlocks</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>24. What is the in-game currency in Roblox called?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q24" value="a" required> Tix</label></li>
+                                <li><label><input type="radio" name="q24" value="b"> Coins</label></li>
+                                <li><label><input type="radio" name="q24" value="c"> Robux</label></li>
+                                <li><label><input type="radio" name="q24" value="d"> Gems</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>25. How can you rename a part in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q25" value="a" required> By clicking on the part and typing its new name directly.</label></li>
+                                <li><label><input type="radio" name="q25" value="b"> By double-clicking its name in the Explorer panel.</label></li>
+                                <li><label><input type="radio" name="q25" value="c"> By selecting the Rename Tool.</label></li>
+                                <li><label><input type="radio" name="q25" value="d"> By dragging it to a new folder.</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>26. What is the purpose of the Output panel in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q26" value="a" required> To view game assets.</label></li>
+                                <li><label><input type="radio" name="q26" value="b"> To change part colors.</label></li>
+                                <li><label><input type="radio" name="q26" value="c"> To display errors and script outputs.</label></li>
+                                <li><label><input type="radio" name="q26" value="d"> To resize parts.</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>27. Which of the following is a valid part shape in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q27" value="a" required> Rectangle</label></li>
+                                <li><label><input type="radio" name="q27" value="b"> Block</label></li>
+                                <li><label><input type="radio" name="q27" value="c"> Circle</label></li>
+                                <li><label><input type="radio" name="q27" value="d"> Triangle</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>28. What is the maximum number of friends you can have on Roblox?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q28" value="a" required> 100</label></li>
+                                <li><label><input type="radio" name="q28" value="b"> 200</label></li>
+                                <li><label><input type="radio" name="q28" value="c"> 300</label></li>
+                                <li><label><input type="radio" name="q28" value="d"> Unlimited</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>29. What tool is used to connect two parts in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q29" value="a" required> Rotate Tool</label></li>
+                                <li><label><input type="radio" name="q29" value="b"> Move Tool</label></li>
+                                <li><label><input type="radio" name="q29" value="c"> Weld Tool</label></li>
+                                <li><label><input type="radio" name="q29" value="d"> Scale Tool</label></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="question">
+                            <p>30. What is the shortcut to playtest your game in Roblox Studio?</p>
+                            <ul class="answers">
+                                <li><label><input type="radio" name="q30" value="a" required> F5</label></li>
+                                <li><label><input type="radio" name="q30" value="b"> F6</label></li>
+                                <li><label><input type="radio" name="q30" value="c"> Ctrl + P</label></li>
+                                <li><label><input type="radio" name="q30" value="d"> Alt + R</label></li>
+                            </ul>
+                        </div>
+                        
